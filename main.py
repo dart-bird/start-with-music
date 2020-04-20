@@ -2,15 +2,15 @@ import logging
 import random
 import time
 import os
-import pyperclip
+# import pyperclip
 from bs4 import BeautifulSoup
-from playsound import playsound
+# from playsound import playsound
 from selenium import webdriver
-from selenium.common.exceptions import (NoSuchElementException,
-                                        WebDriverException)
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
+# from selenium.common.exceptions import (NoSuchElementException,
+#                                         WebDriverException)
+# from selenium.webdriver.common.action_chains import ActionChains
+# from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
 
 # WebDriver Path
@@ -26,17 +26,22 @@ chrome_options = Options()
 chrome_options.add_extension(youtubeAdBlock)
 chrome_options.add_extension(youtubeNoneStop)
 
-# Init webdriver
-music_driver = webdriver.Chrome(webdriver_path, chrome_options= chrome_options)
-
 # Init start link
-initLink = "https://www.youtube.com/feed/trending?bp=4gIuCggvbS8wNHJsZhIiUExGZ3F1TG5MNTlhazRyWjBFRjlCenhOSVFBUG9ubGRYeA%3D%3D"
+myfile = open("./targetLink.txt", "r+", encoding="utf8")
+initLink = myfile.readline()
+myfile.close()
+print(initLink)
+
+# Init webdriver
+music_driver = webdriver.Chrome(webdriver_path, options=chrome_options)
+
 
 # Func
 def StartWithChrome():
-    
+
     music_driver.get(initLink)
     youtubeList = music_driver.find_elements_by_id('video-title')
-    youtubeList[random.randint(0,len(youtubeList)-1)].click()
+    youtubeList[random.randint(0, len(youtubeList) - 1)].click()
+
 
 StartWithChrome()
