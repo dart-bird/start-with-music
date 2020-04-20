@@ -13,25 +13,30 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
 
+# WebDriver Path
 webdriver_path = "./chromedriver.exe"
+
+# Extensions Path
+youtubeAdBlock = "./chromeExtensions/youtubeAdBlock/youtubeAdBlock_extension.crx"
+youtubeNoneStop = "./chromeExtensions/youtubeNoneStop/youtubeNoneStop_extension.crx"
+
+# WebDriver Settings
+os.environ["webdriver.chrome.driver"] = webdriver_path
+chrome_options = Options()
+chrome_options.add_extension(youtubeAdBlock)
+chrome_options.add_extension(youtubeNoneStop)
+
+# Init webdriver
+music_driver = webdriver.Chrome(webdriver_path, chrome_options= chrome_options)
+
+# Init start link
 initLink = "https://www.youtube.com/feed/trending?bp=4gIuCggvbS8wNHJsZhIiUExGZ3F1TG5MNTlhazRyWjBFRjlCenhOSVFBUG9ubGRYeA%3D%3D"
 
-music_driver = webdriver.Chrome(webdriver_path)
-
-#Extensions
-youtubeAdBlock = ".\\chromeExtensions\\youtubeAdBlock\\youtubeAdBlock_extension.crx"
-youtubeNoneStop = ".\\chromeExtensions\\youtubeNoneStop\\youtubeNoneStop_extension.crx"
-
-def SettingExtension(webdriver_path):
-    os.environ["webdriver.chrome.driver"] = webdriver_path
-    chrome_options = Options()
-    chrome_options.add_extension(youtubeAdBlock)
-    chrome_options.add_extension(youtubeNoneStop)
-
+# Func
 def StartWithChrome():
+    
     music_driver.get(initLink)
     youtubeList = music_driver.find_elements_by_id('video-title')
     youtubeList[random.randint(0,len(youtubeList)-1)].click()
 
-SettingExtension(webdriver_path=webdriver_path)
 StartWithChrome()
