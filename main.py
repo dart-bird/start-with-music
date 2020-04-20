@@ -21,22 +21,31 @@ chrome_options = Options()
 chrome_options.add_extension(youtubeAdBlock)
 chrome_options.add_extension(youtubeNoneStop)
 
-# Init start link
-myfile = open("./targetLink.txt", "r+", encoding="utf8")
-initLink = myfile.readline()
+# Init start link title
+myfile = open("./targetSearch.txt", "r+", encoding="utf8")
+searchTitle = myfile.readlines()
 myfile.close()
-print(initLink)
-
+print("Total Search Title ~ ", searchTitle)
 # Init webdriver
 music_driver = webdriver.Chrome(webdriver_path, options=chrome_options)
 
 
 # Func
-def StartWithChrome():
+class StartWithChrome():
+    def youtubePlayList():
+        music_driver.get(
+            'https://www.youtube.com/feed/trending?bp=4gIuCggvbS8wNHJsZhIiUExGZ3F1TG5MNTlhazRyWjBFRjlCenhOSVFBUG9ubGRYeA%3D%3D'
+        )
+        youtubeList = music_driver.find_elements_by_id('video-title')
+        youtubeList[random.randint(0, len(youtubeList) - 1)].click()
 
-    music_driver.get(initLink)
-    youtubeList = music_driver.find_elements_by_id('video-title')
-    youtubeList[random.randint(0, len(youtubeList) - 1)].click()
+    def youtubeSearchList():
+        currentPlayTitle = searchTitle[random.randint(0, len(searchTitle) - 1)]
+        print("Today Song Picked PlayList ~ %s" % currentPlayTitle)
+        initLink = "https://www.youtube.com/results?search_query=" + currentPlayTitle
+        music_driver.get(initLink)
+        youtubeList = music_driver.find_elements_by_id('video-title')
+        youtubeList[random.randint(0, len(youtubeList) - 1)].click()
 
 
-StartWithChrome()
+StartWithChrome.youtubeSearchList()
