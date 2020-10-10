@@ -32,14 +32,14 @@ music_driver = webdriver.Chrome(webdriver_path, options=chrome_options)
 
 # Func
 class StartWithChrome():
-    def youtubePlayList():
+    def youtube_playList(self):
         music_driver.get(
             'https://www.youtube.com/feed/trending?bp=4gIuCggvbS8wNHJsZhIiUExGZ3F1TG5MNTlhazRyWjBFRjlCenhOSVFBUG9ubGRYeA%3D%3D'
         )
         youtubeList = music_driver.find_elements_by_id('video-title')
         youtubeList[random.randint(0, len(youtubeList) - 1)].click()
 
-    def youtubeSearchList():
+    def youtube_searchList(self):
         currentPlayTitle = searchTitle[random.randint(0, len(searchTitle) - 1)]
         print("Today Song Picked PlayList ~ %s" % currentPlayTitle)
         initLink = "https://www.youtube.com/results?search_query=" + currentPlayTitle
@@ -48,4 +48,4 @@ class StartWithChrome():
         youtubeList[random.randint(0, len(youtubeList) - 1)].click()
 
 
-StartWithChrome.youtubeSearchList()
+StartWithChrome.youtube_searchList(self=None)
