@@ -5,6 +5,7 @@ play youtube in morning
 - Download Link [Chrome Driver](https://chromedriver.chromium.org/downloads)   
   
 ## HOW?  
-- Make Window Scheduler `main.exe` start on 8.AM
-- BIOS Setup to wake up on 8.AM everyday  
-- Test it & Enjoy ~!
+0. Download & Move chromedriver file into `Start_With_Music` root folder ( folder located in file `main.py` )
+1. Make Window Scheduler `main.py` start on `( any time ) EX) 8 a.m`
+2. BIOS Setup to wake up on `( any time ) EX) 8 a.m` everyday  
+3. Test it & Enjoy ~!
