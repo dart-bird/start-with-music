@@ -4,6 +4,7 @@ import time
 import os
 
 # import pyperclip
+import chromedriver_autoinstaller
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -27,7 +28,6 @@ searchTitle = myfile.readlines()
 myfile.close()
 print("Total Search Title ~ ", searchTitle)
 # Init webdriver
-music_driver = webdriver.Chrome(webdriver_path, options=chrome_options)
 
 
 class Music_player:
@@ -55,5 +55,10 @@ class Music_player:
 
 
 if __name__ == "__main__":
+    try:
+        chromedriver_autoinstaller.install()
+    except:
+        print("Chrome is not installed")
+    music_driver = webdriver.Chrome(options=chrome_options)
     music_player = Music_player(input_driver=music_driver)
     music_player.youtube_play(search_query=searchTitle)
